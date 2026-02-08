@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Crypto recommendation service
+  description: "Crypto recommendation service"
+  version: 1.0.0-SNAPSHOT
+tags:
+  - name: crypto
+    description: Tag for operations on crypto
+paths:
+  /cryptos:
+    get:
+      tags:
+        - crypto
+      summary: Return a descending sorted list of all the cryptos, comparing the normalized range (i.e. (max-min)/min)
+      responses:
+        "200":
+          description: Return a descending sorted list of all the cryptos, comparing the normalized range (i.e. (max-min)/min)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiCryptoRangeList"
+        "401":
+          description: Unauthorized.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+  /crypto/limits:
+    get:
+      tags:
+        - crypto
+      summary: Return the oldest/newest/min/max values for a requested crypto.
+      parameters:
+        - in: query
+          name: symbol
+          required: true
+          schema:
+            type: string
+      description: The numbers of items to return
+      responses:
+        "200":
+          description: Return the oldest/newest/min/max values for a requested crypto.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiCryptoLimits"
+        "400":
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "401":
+          description: Unauthorized.
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+  /crypto/high:
+    get:
+      tags:
+        - crypto
+      summary: Return the crypto with the highest normalized range for a specific day.
+      parameters:
+        - in: query
+          name: date
+          required: true
+          schema:
+            type: string
+            format: date
+      description: The numbers of items to return
+      responses:
+        "200":
+          description: Return the crypto with the highest normalized range for a specific day.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiCryptoRange"
+        "400":
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "401":
+          description: Unauthorized.
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+components:
+  schemas:
+    ApiCryptoRange:
+      type: object
+      properties:
+        symbol:
+          type: string
+          description: BTC, ETH, LTC, XRP, DOGE as of now, but no enum used for extendability
+        normalizedRange:
+          type: double
+    ApiCryptoRangeList:
+      type: array
+      items:
+        $ref: "#/components/schemas/ApiCryptoRange"
+    ApiCrypto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        symbol:
+          type: string
+          description: BTC, ETH, LTC, XRP, DOGE as of now, but no enum used for extendability
+        price:
+          type: double
+    ApiCryptoLimits:
+      type: object
+      properties:
+        oldest:
+          $ref: "#/components/schemas/ApiCrypto"
+        newest:
+          $ref: "#/components/schemas/ApiCrypto"
+        min:
+          $ref: "#/components/schemas/ApiCrypto"
+        max:
+          $ref: "#/components/schemas/ApiCrypto"
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+
+
