@@ -3,6 +3,7 @@ package com.xmcy.controller;
 import com.xmcy.api.CryptoApi;
 import com.xmcy.controller.mapper.CryptoAndNormalizedRangeMapper;
 import com.xmcy.controller.mapper.CryptoLimitsMapper;
+import com.xmcy.controller.validator.CryptoValidator;
 import com.xmcy.model.ApiCryptoLimits;
 import com.xmcy.model.ApiCryptoRange;
 import com.xmcy.service.CryptoRecommendationService;
@@ -23,10 +24,13 @@ import java.time.LocalDate;
 public class CryptoController implements CryptoApi {
 
     private final CryptoRecommendationService cryptoService;
+    private final CryptoValidator cryptoValidator;
 
     @Autowired
-    public CryptoController(CryptoRecommendationService cryptoService) {
+    public CryptoController(CryptoRecommendationService cryptoService,
+                            CryptoValidator cryptoValidator) {
         this.cryptoService = cryptoService;
+        this.cryptoValidator = cryptoValidator;
     }
 
     @GetMapping(
@@ -49,6 +53,7 @@ public class CryptoController implements CryptoApi {
     public ResponseEntity<ApiCryptoLimits> cryptoLimitsGet(
         @NotNull @Parameter(name = "symbol", required = true, in = ParameterIn.QUERY)
         @Valid @RequestParam(value = "symbol") String symbol) {
+        cryptoValidator.validate(symbol);
         var cryptoLimits = cryptoService.getCryptoLimits(symbol);
         return ResponseEntity.ok(CryptoLimitsMapper.INSTANCE.convert(cryptoLimits));
     }

@@ -26,8 +26,8 @@ class CsvLineConverterTest {
             of(new String[]{"a", "b"}, null),
             of(new String[]{"4.5", "BTC", "46813.21"}, null),
             of(new String[]{"timestamp", "symbol", "price"}, null),
-            of(new String[]{"1641009600000", " ", "46813.21"}, null),
-            of(new String[]{"1641009600000", "BTC", ""}, null),
+            of(new String[]{"1641009600001", " ", "46813.21"}, null),
+            of(new String[]{"1641009600002", "BTC", ""}, null),
             of(new String[]{"1641009600000", "BTC", "46813.21"},
                 new CryptoModel(LocalDateTime.of(2022, 1, 1, 4, 0), "BTC", 46813.21))
         );

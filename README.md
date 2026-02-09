@@ -2,11 +2,12 @@
 
 ## Modules
 
-- **api:** Contains crypto-api.yaml
-- **application:** Application entry point. Rate limiting (set only for one endpoint as POC).
-- **controller:** Controller layer, REST endpoints, conversion to api model.
+- **api:** Contains crypto-api.yaml. Interface generated from it for Controllers.
+- **application:** Application entry point. Rate limiting (set only for one endpoint as POC). Configuration for allowed
+  cryptos.
+- **controller:** Controller layer, REST endpoints, conversion to api model via MapStruct, validation, error handling.
 - **integration-test:** MockMvc spring boot tests for all endpoints.
-- **service:** Business logic/service layer.
+- **service:** Business logic/service layer. Csv loading.
 - **chart:** Helm chart
 
 ## Coverage report

@@ -1,5 +1,6 @@
 package com.xmcy.controller;
 
+import com.xmcy.controller.validator.CryptoValidator;
 import com.xmcy.model.ApiCrypto;
 import com.xmcy.model.ApiCryptoLimits;
 import com.xmcy.model.ApiCryptoRange;
@@ -26,6 +27,9 @@ class CryptoControllerTest {
 
     @Mock
     private CryptoRecommendationService cryptoService;
+
+    @Mock
+    private CryptoValidator cryptoValidator;
 
     @InjectMocks
     private CryptoController cryptoController;

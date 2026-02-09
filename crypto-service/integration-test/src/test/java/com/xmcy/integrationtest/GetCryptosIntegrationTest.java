@@ -29,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 class GetCryptosIntegrationTest {
 
+    private static final String GET_CRYPTOS_PATH = "/cryptos";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -42,7 +44,7 @@ class GetCryptosIntegrationTest {
         String expectedContent = """
             [{"normalizedRange":0.638,"symbol":"ETH"},{"normalizedRange":0.506,"symbol":"XRP"},{"normalizedRange":0.505,"symbol":"DOGE"},{"normalizedRange":0.465,"symbol":"LTC"},{"normalizedRange":0.434,"symbol":"BTC"}]
             """;
-        mockMvc.perform(get("/cryptos")
+        mockMvc.perform(get(GET_CRYPTOS_PATH)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().json(expectedContent));
@@ -51,7 +53,7 @@ class GetCryptosIntegrationTest {
     @Test
     void getCryptosShouldReturn401() throws Exception {
         log.info("Running getCryptosShouldReturn401");
-        mockMvc.perform(get("/cryptos")
+        mockMvc.perform(get(GET_CRYPTOS_PATH)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isUnauthorized());
     }
@@ -64,7 +66,7 @@ class GetCryptosIntegrationTest {
         String expectedJson = """
             {"message":"Unexpected exception"}
             """;
-        mockMvc.perform(get("/cryptos")
+        mockMvc.perform(get(GET_CRYPTOS_PATH)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError())
             .andExpect(content().json(expectedJson));
@@ -76,7 +78,7 @@ class GetCryptosIntegrationTest {
         log.info("Running wgetCryptosShouldReturn429AfterTooManyRequests");
         Set<Integer> responses = new HashSet<>();
         for (int i = 0; i < 20; i++) {
-            responses.add(mockMvc.perform(get("/cryptos")
+            responses.add(mockMvc.perform(get(GET_CRYPTOS_PATH)
                     .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse().getStatus());
         }

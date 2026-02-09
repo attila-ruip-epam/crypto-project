@@ -16,7 +16,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = CryptoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    classes = CryptoApplication.class,
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    properties = {"xmcy.supported.cryptos=BTC,ETH,LTC,XRP,DOGE,DUMMY"})
 @AutoConfigureMockMvc
 class GetCryptoLimitsIntegrationTest {
 
@@ -67,6 +70,19 @@ class GetCryptoLimitsIntegrationTest {
             {"message":"Invalid input"}
             """;
         mockMvc.perform(get("/crypto/limits")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().json(expectedJson));
+    }
+
+    @WithMockUser
+    @Test
+    void getCryptoLimitsShouldReturn400WhenUnsupportedCrypto() throws Exception {
+        String expectedJson = """
+            {"message":"Invalid input"}
+            """;
+        mockMvc.perform(get("/crypto/limits")
+                .param("symbol", "NOT_SUPPORTED")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isBadRequest())
             .andExpect(content().json(expectedJson));
