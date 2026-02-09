@@ -11,7 +11,7 @@
 
     <groupId>com.xmcy</groupId>
     <artifactId>crypto-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -28,7 +28,6 @@
         <maven.compiler.target>25</maven.compiler.target>
         <maven.compiler.release>25</maven.compiler.release>
         <assertj.version>3.27.7</assertj.version>
-        <!--        <spring-cloud.version>2025.1.0</spring-cloud.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <openapi-generator-maven-plugin.version>7.19.0</openapi-generator-maven-plugin.version>
         <opencsv.version>5.12.0</opencsv.version>
@@ -106,14 +105,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-
-            <!--            <dependency>-->
-            <!--                <groupId>org.springframework.cloud</groupId>-->
-            <!--                <artifactId>spring-cloud-dependencies</artifactId>-->
-            <!--                <version>${spring-cloud.version}</version>-->
-            <!--                <type>pom</type>-->
-            <!--                <scope>import</scope>-->
-            <!--            </dependency>-->
             <dependency>
                 <groupId>com.opencsv</groupId>
                 <artifactId>opencsv</artifactId>

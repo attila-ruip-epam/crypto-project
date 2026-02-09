@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.xmcy</groupId>
         <artifactId>crypto-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>controller</artifactId>
-
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>com.xmcy</groupId>

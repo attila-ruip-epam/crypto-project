@@ -9,13 +9,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("com.xmcy")
-public class Application {
+public class CryptoApplication {
 
     @Value("${xmcy.ratelimit.per.minute}")
     private int rateLimit;
 
     static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(CryptoApplication.class, args);
     }
 
     @Bean
