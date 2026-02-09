@@ -19,5 +19,18 @@ Command on root pom level **mvn clean verify** generates aggregated jacoco cover
 - Spring Boot 4
 - Maven
 
+## Dockerize
 
+- run **mvn clean package**
+- run **docker build --tag=crypto-app:0.0.2 .**
+
+//TODO unfortunately due to a likely config/plugin issue **docker run crypto-app:0.0.2** is not working right now, might
+not be able to fix until deadline
+
+## Helm
+
+- helm chart created via **helm create chart/crypto-app**
+- installed via **helm install crypto-app chart/crypto-app**
+- if installed, check via **kubectl get pods**
+- uninstall via **helm uninstall crypto-app**
 
