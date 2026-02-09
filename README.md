@@ -33,6 +33,6 @@ right now, might not be able to fix until deadline. Don't use latest versions
 
 - helm chart created via **helm create chart/crypto-app**
 - installed via **helm install crypto-app chart/crypto-app**
-- if installed, check via **kubectl get pods**
+- if kubectl installed, check via **kubectl get pods**
 - uninstall via **helm uninstall crypto-app**
 
