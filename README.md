@@ -7,6 +7,7 @@
 - **controller:** Controller layer, REST endpoints, conversion to api model.
 - **integration-test:** MockMvc spring boot tests for all endpoints.
 - **service:** Business logic/service layer.
+- **chart:** Helm chart
 
 ## Coverage report
 
