@@ -25,8 +25,8 @@ Command on root pom level **mvn clean verify** generates aggregated jacoco cover
 - run **mvn clean package**
 - run **docker build --tag=crypto-app:0.0.2 .**
 
-//TODO unfortunately due to a likely config/plugin issue **docker run crypto-app:0.0.2** is not working right now, might
-not be able to fix until deadline
+//TODO unfortunately due to a likely version incompatibility/plugin issue **docker run crypto-app:0.0.2** is not working
+right now, might not be able to fix until deadline. Don't use latest versions
 
 ## Helm
 
