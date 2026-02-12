@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ class CsvLoadingCryptoCacheTest {
     private CsvLoadingCryptoCache cryptoCache;
 
     @BeforeEach
-    void beforeEach() throws IOException {
+    void beforeEach() {
         List<CryptoModel> models = new ArrayList<>();
         LocalDateTime now = LocalDateTime.now();
         models.add(new CryptoModel(now, "BTC", 3.1));
@@ -44,7 +43,7 @@ class CsvLoadingCryptoCacheTest {
     }
 
     @Test
-    void loadCacheShouldLoadCache() throws IOException {
+    void loadCacheShouldLoadCache() {
         cryptoCache.loadCache(null);
         cryptoCache.loadCache(null);
 
@@ -52,7 +51,7 @@ class CsvLoadingCryptoCacheTest {
     }
 
     @Test
-    void getCryptoModelsWithParameterShouldReturnList() throws IOException {
+    void getCryptoModelsWithParameterShouldReturnList() {
         List<CryptoModel> cryptoModels = cryptoCache.getCryptoModels("DOGE");
 
         assertThat(cryptoModels).hasSize(3);
@@ -60,7 +59,7 @@ class CsvLoadingCryptoCacheTest {
     }
 
     @Test
-    void getCryptoModelsShouldReturnGroupedMap() throws IOException {
+    void getCryptoModelsShouldReturnGroupedMap() {
         Map<String, List<CryptoModel>> cryptoModels = cryptoCache.getCryptoToModels();
 
         assertThat(cryptoModels).hasSize(3);
@@ -72,7 +71,7 @@ class CsvLoadingCryptoCacheTest {
     }
 
     @Test
-    void getCryptoModelsShouldReturnImmutableMap() throws IOException {
+    void getCryptoModelsShouldReturnImmutableMap() {
         Map<String, List<CryptoModel>> cryptoModels = cryptoCache.getCryptoToModels();
 
         assertThatThrownBy(cryptoModels::clear).isInstanceOf(UnsupportedOperationException.class);

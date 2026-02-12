@@ -19,16 +19,15 @@
         <module>application</module>
         <module>service</module>
         <module>controller</module>
-        <module>integration-test</module>
     </modules>
 
     <properties>
         <java.version>25</java.version>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
+        <!--        <maven.compiler.source>25</maven.compiler.source>-->
+        <!--        <maven.compiler.target>25</maven.compiler.target>-->
         <maven.compiler.release>25</maven.compiler.release>
         <assertj.version>3.27.7</assertj.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
         <openapi-generator-maven-plugin.version>7.19.0</openapi-generator-maven-plugin.version>
         <opencsv.version>5.12.0</opencsv.version>
         <jackson-databind-nullable.version>0.2.8</jackson-databind-nullable.version>
@@ -38,11 +37,6 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <swagger.version>2.2.42</swagger.version>
     </properties>
-
-    <dependencies>
-
-
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -64,11 +58,6 @@
             <dependency>
                 <groupId>com.xmcy</groupId>
                 <artifactId>application</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.xmcy</groupId>
-                <artifactId>integration-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

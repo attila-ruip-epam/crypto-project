@@ -1,4 +1,4 @@
-package com.xmcy.integrationtest;
+package integrationtest;
 
 import com.xmcy.application.CryptoApplication;
 import com.xmcy.service.CryptoRecommendationService;
