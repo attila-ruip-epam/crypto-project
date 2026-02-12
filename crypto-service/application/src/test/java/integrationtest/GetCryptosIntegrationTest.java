@@ -2,7 +2,6 @@ package integrationtest;
 
 import com.xmcy.application.CryptoApplication;
 import com.xmcy.service.CryptoRecommendationService;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CryptoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.MethodName.class)
-@Slf4j
 class GetCryptosIntegrationTest {
 
     private static final String GET_CRYPTOS_PATH = "/cryptos";
@@ -40,7 +38,6 @@ class GetCryptosIntegrationTest {
     @WithMockUser
     @Test
     void getCryptosShouldReturn200() throws Exception {
-        log.info("Running getCryptosShouldReturn200");
         String expectedContent = """
             [{"normalizedRange":0.638,"symbol":"ETH"},{"normalizedRange":0.506,"symbol":"XRP"},{"normalizedRange":0.505,"symbol":"DOGE"},{"normalizedRange":0.465,"symbol":"LTC"},{"normalizedRange":0.434,"symbol":"BTC"}]
             """;
@@ -52,7 +49,6 @@ class GetCryptosIntegrationTest {
 
     @Test
     void getCryptosShouldReturn401() throws Exception {
-        log.info("Running getCryptosShouldReturn401");
         mockMvc.perform(get(GET_CRYPTOS_PATH)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isUnauthorized());
@@ -61,7 +57,6 @@ class GetCryptosIntegrationTest {
     @WithMockUser
     @Test
     void getCryptosShouldReturn5XX() throws Exception {
-        log.info("Running getCryptosShouldReturn5XX");
         when(cryptoService.getCryptoToNormalizedRange()).thenThrow(new RuntimeException());
         String expectedJson = """
             {"message":"Unexpected exception"}
@@ -75,7 +70,6 @@ class GetCryptosIntegrationTest {
     @WithMockUser
     @Test
     void wgetCryptosShouldReturn429AfterTooManyRequests() throws Exception {
-        log.info("Running wgetCryptosShouldReturn429AfterTooManyRequests");
         Set<Integer> responses = new HashSet<>();
         for (int i = 0; i < 20; i++) {
             responses.add(mockMvc.perform(get(GET_CRYPTOS_PATH)
