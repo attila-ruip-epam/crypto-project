@@ -4,10 +4,9 @@
 
 - **api:** Contains crypto-api.yaml. Interface generated from it for Controllers.
 - **application:** Application entry point. Rate limiting (set only for one endpoint as POC). Configuration for allowed
-  cryptos.
-- **controller:** Controller layer, REST endpoints, conversion to api model via MapStruct, validation, error handling.
-- **integration-test:** MockMvc spring boot tests for all endpoints.
+  cryptos. MockMvc spring boot tests for all endpoints.
 - **service:** Business logic/service layer. Csv loading.
+- **controller:** Controller layer, REST endpoints, conversion to api model via MapStruct, validation, error handling.
 - **chart:** Helm chart
 
 ## Coverage report
@@ -25,9 +24,7 @@ Command on root pom level **mvn clean verify** generates aggregated jacoco cover
 
 - run **mvn clean package**
 - run **docker build --tag=crypto-app:0.0.2 .**
-
-//TODO unfortunately due to a likely version incompatibility/plugin issue **docker run crypto-app:0.0.2** is not working
-right now, might not be able to fix until deadline. Don't use latest versions
+- run **docker run crypto-app:0.0.2**
 
 ## Helm
 
